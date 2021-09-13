@@ -138,3 +138,156 @@ table {
 body {
   background: #202128;
 }
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  overflow-y: auto;
+  height: 1000px;
+  background: #202128;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.generalTitle {
+  color: white;
+  font-size: 44px;
+  margin: 0 auto;
+  padding: 16px 0;
+  text-align: center;
+  border-bottom: 0.2px solid rgb(61, 61, 61);
+}
+
+.wrapper-tabs {
+  display: flex;
+}
+
+.wrapper-tabs__tabs {
+  width: 50%;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: lightgray;
+  padding: 16px 0;
+  cursor: pointer;
+  border: none;
+  background: #292b33;
+
+}
+
+.active {
+  background: #202128;
+
+}
+
+.searchForm {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  background: #292B33;
+  margin-top: 20px;
+}
+
+.searchForm__button {
+  width: 15%;
+  font-size: 34px;
+  padding: 8px;
+  color: blue;
+  background: #292B33;
+  border: none;
+  border-right: 0.2px solid rgb(61, 61, 61);;
+  outline: none;
+  cursor: pointer;
+}
+
+.searchForm__input {
+  font-size: 18px;
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  padding: 8px;
+  background: #292B33;
+  color: lightgray;
+}
+
+.general-information,
+.wrapper-data {
+  display: flex;
+  border-bottom: 0.2px solid rgb(61, 61, 61);
+  background: #202128;
+}
+
+.wrapper-data:hover {
+  background: #292B33;
+  cursor: pointer;
+}
+
+.wrapper-data > dt,
+dd {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.wrapper-data > dd {
+  width: 40%;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 15%;
+}
+
+.wrapper-data__country {
+  width: 40%;
+  color: darkgray;
+}
+
+.wrapper-data__arrow {
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.general-information__confirmed,
+.wrapper-data__confirmed {
+  color: yellow;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.general-information__deaths,
+.wrapper-data__deaths {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.general-information__recovered,
+.wrapper-data__recovered {
+  color: green;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.general-information__existing,
+.wrapper-data__existing {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.general-information > div {
+  width: 25%;
+  font-size: 20px;
+  padding: 16px 8px;
+  gap: 10px;
+}
+
+.general-information__differnce {
+  font-size: 14px;
+}
