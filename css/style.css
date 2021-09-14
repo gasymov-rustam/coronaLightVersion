@@ -299,11 +299,15 @@ dd {
 }
 
 .wrapper-sort__btn {
-  width: 25%;
+  width: 20%;
   padding: 20px 8px;
   cursor: pointer;
   background: #292B33;
   border: 0.2px solid rgb(61, 61, 61);
   color: lightgray;
   font-size: 18px;
+}
+
+.arrow {
+  visibility: hidden;
 }

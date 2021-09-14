@@ -12,39 +12,38 @@ let counter = 0;
 let order = 1;
 
 axios.get(`https://api-covid19.rnbo.gov.ua/data?to=${currentTime}`)
-  .then(res => {
-    coronaData = res.data;
-    renderCoronaData(wrapperContainerTabsEl, coronaData, [region])
-    renderToHtmlGeneralInformation(wrapperInformationEl, coronaData, [region])
-  })
-  .catch(error => console.warn(error))
+    .then(res => {
+        coronaData = res.data;
+        renderCoronaData(wrapperContainerTabsEl, coronaData, [region])
+        renderToHtmlGeneralInformation(wrapperInformationEl, coronaData, [region])
+    })
+    .catch(error => console.warn(error))
 
 wrapperTabsEl.addEventListener('click', e => {
-  region = e.target.dataset.region;
-  Array.from(wrapperTabsEl.children).forEach(el => {
-    el.classList.remove('active');
-    e.target.classList.add('active')
-  })
-  searchFormEl.reset();
-  renderCoronaData(wrapperContainerTabsEl, coronaData, [region])
-  renderToHtmlGeneralInformation(wrapperInformationEl, coronaData, [region])
-  let newarr = coronaData[region];
-  console.log(newarr.sort(sortTo(newarr, ['confirmed'], -1)));
+    region = e.target.dataset.region;
+    Array.from(wrapperTabsEl.children).forEach(el => {
+        el.classList.remove('active');
+        e.target.classList.add('active')
+    })
+    searchFormEl.reset();
+    renderCoronaData(wrapperContainerTabsEl, coronaData, [region])
+    renderToHtmlGeneralInformation(wrapperInformationEl, coronaData, [region])
+    let newarr = coronaData[region];
 })
 
 
 
 function renderCoronaData(elemForRender, dataArray, region) {
-  elemForRender.innerHTML = createDataArr(dataArray, region).join('');
+    elemForRender.innerHTML = createDataArr(dataArray, region).join('');
 }
 
 function createDataArr(dataArray, region) {
-  if (Array.isArray(dataArray)) return dataArray.map((field) => createDataField(field));
-  else return dataArray[region].map((field) => createDataField(field));
+    if (Array.isArray(dataArray)) return dataArray.map((field) => createDataField(field));
+    else return dataArray[region].map((field) => createDataField(field));
 }
 
 function createDataField(array) {
-  return `<dl class="wrapper-data">
+    return `<dl class="wrapper-data">
             <dt class="wrapper-data__country">${array?.label?.uk}</dt>
             <dd class="wrapper-data__confirmed">
               <p>${array?.confirmed}</p>
@@ -66,19 +65,19 @@ function createDataField(array) {
 }
 
 function createDataDifference(array, smartKey) {
-  let difference = '';
-  if (array[smartKey] > 0) difference = `<p  class="wrapper-data__delta"><i class="fas fa-arrow-up"></i> ${array[smartKey]}</p>`;
-  if (array[smartKey] < 0) difference = `<p  class="wrapper-data__delta"><i class="fas fa-arrow-down"></i></i> ${array[smartKey]}</p>`;
-  if (array[smartKey] === 0) difference = `<p  class="wrapper-data__delta"> - </p>`;
-  return difference;
+    let difference = '';
+    if (array[smartKey] > 0) difference = `<p  class="wrapper-data__delta"><i class="fas fa-arrow-up"></i> ${array[smartKey]}</p>`;
+    if (array[smartKey] < 0) difference = `<p  class="wrapper-data__delta"><i class="fas fa-arrow-down"></i></i> ${array[smartKey]}</p>`;
+    if (array[smartKey] === 0) difference = `<p  class="wrapper-data__delta"> - </p>`;
+    return difference;
 }
 
 function renderToHtmlGeneralInformation(element, array, region) {
-  element.innerHTML = createHtmlGeneralInformation(array, region);
+    element.innerHTML = createHtmlGeneralInformation(array, region);
 }
 
 function createHtmlGeneralInformation(array, region) {
-  return `<div class="general-information__confirmed">
+    return `<div class="general-information__confirmed">
                 <p>Виявлено:</p>
                 <p>${createGeneralInformation(array, region, 'confirmed')}</p>
                 ${createGeneralDifference(array, region, 'delta_confirmed')}
@@ -101,68 +100,57 @@ function createHtmlGeneralInformation(array, region) {
 }
 
 function createGeneralDifference(array, region, smartKey) {
-  let difference = '';
-  if (createGeneralInformation(array, region, smartKey) > 0) difference = `<p class="general-information__differnce"><i class="fas fa-arrow-up"></i> ${createGeneralInformation(array, region, smartKey)}</p>`;
-  if (createGeneralInformation(array, region, smartKey) < 0) difference = `<p class="general-information__differnce"><i class="fas fa-arrow-down"></i></i> ${createGeneralInformation(array, region, smartKey)}</p>`;
-  if (createGeneralInformation(array, region, smartKey) === 0) difference = `<p class="general-information__differnce"> - </p>`;
-  return difference;
+    let difference = '';
+    if (createGeneralInformation(array, region, smartKey) > 0) difference = `<p class="general-information__differnce"><i class="fas fa-arrow-up"></i> ${createGeneralInformation(array, region, smartKey)}</p>`;
+    if (createGeneralInformation(array, region, smartKey) < 0) difference = `<p class="general-information__differnce"><i class="fas fa-arrow-down"></i></i> ${createGeneralInformation(array, region, smartKey)}</p>`;
+    if (createGeneralInformation(array, region, smartKey) === 0) difference = `<p class="general-information__differnce"> - </p>`;
+    return difference;
 }
 
 function createGeneralInformation(array, region, smartKey) {
-  return array[region].reduce((total, item) => {
-    total += item[smartKey]
-    return total;
-  }, 0)
+    return array[region].reduce((total, item) => {
+        total += item[smartKey]
+        return total;
+    }, 0)
 }
 
 searchFormEl.addEventListener('keyup', e => {
-  e.preventDefault();
-  const searchField = ['uk', 'en'];
-  const query = String(e.target.value.trim().toLowerCase().split(' ').filter(word => !!word).slice(0, 1));
-  newCoronaData = coronaData[region].filter(country => {
-    return searchField.some(field => {
-      return String(country.label[field]).toLowerCase().includes(query)
+    e.preventDefault();
+    const searchField = ['uk', 'en'];
+    const query = String(e.target.value.trim().toLowerCase().split(' ').filter(word => !!word).slice(0, 1));
+    newCoronaData = coronaData[region].filter(country => {
+        return searchField.some(field => {
+            return String(country.label[field]).toLowerCase().includes(query)
+        })
     })
-  })
-  renderCoronaData(wrapperContainerTabsEl, newCoronaData)
+    renderCoronaData(wrapperContainerTabsEl, newCoronaData)
 })
 
 function sortTo(arr, smartKey, order) {
-  if (typeof arr[0][smartKey]['uk'] === "string") {
-    return (a, b) => a[smartKey]['uk'].localeCompare(b[smartKey]['uk']) * order;
-  } else {
-    return (a, b) => (a[smartKey] - b[smartKey]) * order;
-  }
+    if (typeof arr[0][smartKey]['uk'] === "string") {
+        return (a, b) => a[smartKey]['uk'].localeCompare(b[smartKey]['uk']) * order;
+    } else {
+        return (a, b) => (a[smartKey] - b[smartKey]) * order;
+    }
 }
 
 wrapperBtn.addEventListener('click', e => {
-  const key = e.target.value;
-  const inscriptionSort = e.target.dataset.select;
-  let newCorona = coronaData[region];
-  
-  Array.from(wrapperBtn.children).forEach(item => {
-    // let a = item.innerHTML
-  })
+    const key = e.target.value;
+    const inscriptionSort = e.target.dataset.select;
+    let newCorona = coronaData[region];
+    Array.from(wrapperBtn.children).forEach(btn => {
+        const btnName= btn.dataset.select
+        btn.innerHTML = `${btnName}`})
 
-  if (key === 'label' && order > 0) {
-    newCorona.sort(sortTo(newCorona, [key], order))
-    renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
-    order = -1;
-    e.target.innerHTML = `<i class="fas fa-arrow-up"></i> ${inscriptionSort}`;
-  } else if (key === 'label' && order < 0) {
-    newCorona.sort(sortTo(newCorona, [key], order))
-    renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
-    order = 1;
-    e.target.innerHTML = `<i class="fas fa-arrow-down"></i> ${inscriptionSort}`;
-  } else if (key === 'confirmed' && order > 0) {
-    newCorona.sort(sortTo(newCorona, [key], order))
-    renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
-    order = -1;
-    e.target.innerHTML = `<i class="fas fa-arrow-down"></i> ${inscriptionSort}`;
-  } else if (key === 'confirmed' && order < 0) {
-    newCorona.sort(sortTo(newCorona, [key], order))
-    renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
-    order = 1;
-    e.target.innerHTML = `<i class="fas fa-arrow-up"></i> ${inscriptionSort}`;
-  }
+    if (order > 0) {
+        newCorona.sort(sortTo(newCorona, [key], order))
+        renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
+        order = -1;
+        e.target.innerHTML = `<i class="fas fa-arrow-down"></i> ${inscriptionSort}`;
+    } else {
+        newCorona.sort(sortTo(newCorona, [key], order))
+        renderCoronaData(wrapperContainerTabsEl, newCorona, [region]);
+        order = 1;
+        e.target.innerHTML = `<i class="fas fa-arrow-up"></i> ${inscriptionSort}`;
+    }
 })
