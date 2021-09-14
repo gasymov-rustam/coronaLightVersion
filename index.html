@@ -24,9 +24,14 @@
         </div>
 
         <form method="get" class="searchForm" name="searchByRegion" id=searchFormEl>
-            <button type="submit" class="searchForm__button"><i class="fas fa-search"></i></button>
-            <input type="text" class="searchForm__input" name="searchPlace" placeholder="search by region">
+            <button type="submit" class="searchForm__button" disabled><i class="fas fa-search"></i></button>
+            <input type="text" class="searchForm__input" name="searchPlace" placeholder="search by region" id="searchPlaceEl">
         </form>
+
+        <div class="wrapper-sort" id="wrapperSort">
+            <button class="wrapper-sort__btn" data-select="country" value="label">country</button>
+            <button class="wrapper-sort__btn" data-select="confirmed" value="confirmed">confirmed</button>
+        </div>
 
         <div class="general-information" id="generalInformation">
             <!-- <div class="general-information__confirmed">

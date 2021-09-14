@@ -137,12 +137,11 @@ table {
 
 body {
   background: #202128;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 .container {
   max-width: 900px;
   width: 100%;
-  overflow-y: auto;
-  height: 1000px;
   background: #202128;
   margin: 0 auto;
   padding: 0 16px;
@@ -220,7 +219,7 @@ dd {
   color: yellow;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .general-information__deaths,
@@ -228,7 +227,7 @@ dd {
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .general-information__recovered,
@@ -236,7 +235,7 @@ dd {
   color: green;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .general-information__existing,
@@ -244,7 +243,11 @@ dd {
   color: red;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+}
+
+.wrapper-data__delta {
+  font-size: .8em;
 }
 
 .searchForm {
@@ -262,7 +265,7 @@ dd {
   color: blue;
   background: #292B33;
   border: none;
-  border-right: 0.2px solid rgb(61, 61, 61);;
+  border-right: 0.2px solid rgb(61, 61, 61);
   outline: none;
   cursor: pointer;
 }
@@ -285,5 +288,22 @@ dd {
 }
 
 .general-information__differnce {
-  font-size: 14px;
+  font-size: .7em;
+}
+
+.wrapper-sort {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.wrapper-sort__btn {
+  width: 25%;
+  padding: 20px 8px;
+  cursor: pointer;
+  background: #292B33;
+  border: 0.2px solid rgb(61, 61, 61);
+  color: lightgray;
+  font-size: 18px;
 }
