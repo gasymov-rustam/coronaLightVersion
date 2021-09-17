@@ -220,6 +220,7 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .general-information__deaths,
@@ -228,6 +229,7 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .general-information__recovered,
@@ -236,6 +238,7 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .general-information__existing,
@@ -243,6 +246,7 @@ dd {
   color: red;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
